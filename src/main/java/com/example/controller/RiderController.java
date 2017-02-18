@@ -9,13 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/rider")
+@RequestMapping("/riders" +
+        "")
 public class RiderController {
 
     @Autowired
@@ -52,10 +52,10 @@ public class RiderController {
         return riderRepository.findByNacionalidad(nacionalidad);
     }
 
-    @GetMapping("/nacidoAntesDe/{birthday}")
+    /*@GetMapping("/nacidoAntesDe/{birthday}")
     public List<Rider> findByBirthdayBefore(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate birthday) {
         return riderRepository.findByBirthdayBefore(birthday);
-    }
+    }*/
 
     @GetMapping("/ridersPorPais")
     public Map<String, List<Rider>> ridersByNacionalidad() {
@@ -63,10 +63,9 @@ public class RiderController {
                 .findAll()
                 .parallelStream()
                 .collect(Collectors.groupingBy(Rider::getNacionalidad));
-
     }
 
-    @GetMapping("/PorCategoria")
+   /* @GetMapping("/PorCategoria")
     public Map<Categoria, List<Rider>> getRiderGroupByCategoria() {
         return riderRepository
                 .findAll()
@@ -82,5 +81,5 @@ public class RiderController {
                         return Categoria.VACIO;
                     }
                 }));
-    }
+    }*/
 }
